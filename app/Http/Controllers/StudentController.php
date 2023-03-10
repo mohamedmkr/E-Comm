@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Comment;
@@ -14,8 +13,7 @@ class StudentController extends Controller
 {
       public function showPostView(){
 
-        $posts=Comment::findAll();
-        return view('student.postComment',compact('posts'));
+        return view('student.postComment');
     }
 
 
@@ -34,14 +32,14 @@ class StudentController extends Controller
         $student = Student::where('id', $id);
         $student->course()->attach($course_id);
 
-       return view('student.Courses');
+       return view('student.courses');
     }
 
     public function showEnrolledCourses(){
 
         $id = Auth::id();
         $courses=Student::where('id', $id)->courses();
-        return view('student.Courses',compact('courses'));
+        return view('student.courses',compact('courses'));
 
 
     }
