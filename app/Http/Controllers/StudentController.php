@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -24,7 +25,15 @@ class StudentController extends Controller
         ]);
         // Eloquent Model
         Comment::create($request->comment());
-        return redirect()->route('home')->with('success', 'comment Added Successfully');}
+        $courses=Course::with('techer')->get();
+        $teachers=Teacher::All();
+        $comments=Comment::with('student')->get();
+
+        return redirect()->route('home')->with('success', 'comment Added Successfully')
+        ->with(['courses' => 'courses',
+        'teachers' =>'teachers',
+        'comments' =>'comment',
+        ]) ;}
 
 
     public function registerInCourse($course_id){
@@ -32,7 +41,10 @@ class StudentController extends Controller
         $student = Student::where('id', $id);
         $student->course()->attach($course_id);
 
-       return view('student.courses');
+        $courses=Course::with('techer')->get();
+        $comments=Comment::with('student')->get();
+
+       return view('student.courses',compact('courses,comments'));
     }
 
     public function showEnrolledCourses(){
