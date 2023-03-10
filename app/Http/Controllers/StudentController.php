@@ -41,16 +41,15 @@ class StudentController extends Controller
         $student = Student::where('id', $id);
         $student->course()->attach($course_id);
 
-        $courses=Course::with('techer')->get();
-        $comments=Comment::with('student')->get();
+        $courses=Student::where('id', $id)->courses()->with('techer')->get();
 
-       return view('student.courses',compact('courses,comments'));
+       return view('student.courses',compact('courses'));
     }
 
     public function showEnrolledCourses(){
 
         $id = Auth::id();
-        $courses=Student::where('id', $id)->courses();
+        $courses=Student::where('id', $id)->courses()->with('techer')->get();
         return view('student.courses',compact('courses'));
 
 
