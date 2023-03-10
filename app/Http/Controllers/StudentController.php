@@ -25,7 +25,7 @@ class StudentController extends Controller
         ]);
         // Eloquent Model
         Comment::create($request->comment());
-        $courses=Course::with('techer')->get();
+        $courses=Course::with('teacher')->get();
         $teachers=Teacher::All();
         $comments=Comment::with('student')->get();
 
@@ -41,7 +41,7 @@ class StudentController extends Controller
         $student = Student::where('id', $id);
         $student->course()->attach($course_id);
 
-        $courses=Student::where('id', $id)->courses()->with('techer')->get();
+        $courses=Student::where('id', $id)->courses()->with('teacher')->get();
 
        return view('student.courses',compact('courses'));
     }
@@ -49,7 +49,7 @@ class StudentController extends Controller
     public function showEnrolledCourses(){
 
         $id = Auth::id();
-        $courses=Student::where('id', $id)->courses()->with('techer')->get();
+        $courses=Student::where('id', $id)->courses()->with('teacher')->get();
         return view('student.courses',compact('courses'));
 
 
