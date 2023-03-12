@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
@@ -17,16 +17,14 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('avatar_link');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
 
-
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('teachers');
     }
