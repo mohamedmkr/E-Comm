@@ -18,8 +18,5 @@ class checkIsStudent
     {
         if (auth()->check() && auth()->user()->getTable() == 'students')
         return $next($request);
-    else{
-        return redirect('/login');
-    }
     }
 }
