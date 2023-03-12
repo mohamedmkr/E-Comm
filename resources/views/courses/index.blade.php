@@ -9,9 +9,9 @@
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4" style="display: inline;"> Courses</h6>
                     {{-- add button --}}
-                    <button onclick="window.location.href='{{ route('showAddCourseView') }}';"
+                    <button onclick="window.location.href='{{ '/teacher/courses/add' }}';"
                         class="btn btn-primary"style="float: right;">ADD</button>
-                    <table class="table table-bordered">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -33,13 +33,13 @@
                                     <td>{{ $course['description'] }}</td>
                                     <td>{{ $course['img_url'] }}</td>
                                     <td>{{ $course['Price'] }}</td>
-                                    <td>{{ $course['category_id'] }}</td>
+                                    <td>{{ $course['category']['name'] }}</td>
                                     <td>0</td>
                                     <td>
-                                        <button onclick="location.href='{{ route('showEditCourseView', $course['id']) }}'"
+                                        <button onclick="location.href='{{'/teacher/courses/edit/'.$course['id'] }}'"
                                             type="button" class="btn  btn-success btn-sm">Edite</button>
 
-                                        <form style="display: inline;" action="{{ route('removeCourse') }}" method="POST">
+                                        <form style="display: inline;" action="{{ '/teacher/courses/remove'}}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ $course['id'] }}">

@@ -17,7 +17,7 @@ $@extends('courses.layout')
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('updateCourse') }}" method="POST">
+                    <form action="{{ '/teacher/courses/update' }}" method="POST">
                         @csrf
 
                         <input type="hidden" name="id" value="{{ $course['id'] }}">
@@ -52,9 +52,9 @@ $@extends('courses.layout')
                         <label for="courseCategory" class="form-label">Select Category</label>
                         <select id='courseCategory' class="form-select mb-3" aria-label="Default select example"
                             name="Category_id" required>
-                            @foreach ($categories as $categgory)
+                            @foreach ($catigories as $catigory)
                                 <option {{ $loop->iteration == 1 ? 'selected="selected"' : '' }}
-                                    value="{{ $categgory['id'] }}">{{ $categgory['name'] }}</option>
+                                    value="{{ $catigory['id'] }}">{{ $catigory['name'] }}</option>
                             @endforeach
 
                         </select>
