@@ -13,32 +13,59 @@ class homeController extends Controller
     {
         //
     }
+    public function showHomeView()
+    {
+        return view('homeView');
+    }
+    public function showContactView(){
+        return view('contactView');
+    }
+
+    public function showOurTeamsView(){
+        $teams=Team::all();
+        return view('homeView',compact('teams'));
+        
+    }
     public function showCoursesView()
     {
-        $course=Course::all();
-        return view('homeView',compact('courses'));
+        $courses=Course::all();
+        return view('contactView',compact('courses'));
     }
 
       public function showOurTeamView(){
-        $team=Team::all();
-        return view('homeView',compact('team'));
+        $teams=Team::all();
+        return view('homeView',compact('teams'));
         
     }
-    
-
-    public function showCategoriesView(){
-
-      $category=Categories::withCount('Courses')->get();
-        return view('homeView',compact('category'));
+    public function showAboutView(){
+        return view('abortView');
     }
 
-    public function showTestimonialView(){
-        
-        $testimonial=testimonial::all();
-        return view('homeView',compact('testimonial'));  
+    public function showLoginView()
+    {
+            if(Auth::id()){
+                return view('loginView');
+            }
+            else
+            {
+          
+              return view('registerView');
+
+             }
     }
-
-
+  
+    public function register(Request $request)
+    {
+        $user=\request()->validate([
+            'user-name'=>'required|max:255|min:3',
+            'user-email'=>'required|email|max:255|unique:users,email',
+            'user-password'=>'required|min:7|max:20',
+        ]);
+        User::create(['name'=>$user['user-name'],'email'=>$user['user-email'],'password'=>bcrypt($user['user-password'])
+    ]);
+        return redirect('/');
+    }
+      
     /**
      * Show the form for creating a new resource.
      */
