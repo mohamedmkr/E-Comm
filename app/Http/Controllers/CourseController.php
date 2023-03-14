@@ -61,7 +61,7 @@ class CourseController extends Controller
             $course->save();
             $courses = Course::where('teacher_id' , Auth::user()->id)->with('category')->withcount('student')->get();
 
-            return redirect()->route('courses.index' , compact('courses'));
+            return redirect('/teacher/courses')->with(compact('courses'));
         }   
     public function updateCourse(Request $request )
         {
@@ -83,7 +83,7 @@ class CourseController extends Controller
             $course->update();
             $courses = Course::where('teacher_id' , Auth::user()->id)->with('category')->withcount('student')->get();
 
-            return redirect()->route('courses.index' , compact('courses'));
+            return redirect('/teacher/courses')->with(compact('courses'));
         } 
     public function removeCourse(Request $request)
     {
@@ -91,7 +91,7 @@ class CourseController extends Controller
          Course::findOrFail($request->id )->delete();
         $courses = Course::where('teacher_id' , Auth::user()->id)->with('category')->withcount('student')->get();
 
-        return redirect()->route('courses.index' , compact('courses'));
+        return redirect('/teacher/courses')->with(compact('courses'));
     }
   
 }
