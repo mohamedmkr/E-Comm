@@ -37,3 +37,4 @@ Route::middleware('auth', 'checkIsTeacher')->group(function () {
     Route::post('/teacher/courses/update', [CourseController::class, 'updateCourse']);
     Route::delete('/teacher/courses/remove', [CourseController::class, 'removeCourse']);
 });
+
