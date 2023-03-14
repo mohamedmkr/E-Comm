@@ -63,10 +63,10 @@ class CourseController extends Controller
 
             return redirect()->route('courses.index' , compact('courses'));
         }   
-    public function editCourse(Request $request , $id)
+    public function updateCourse(Request $request )
         {
            
-            $course = Course::find($id);
+            $course = Course::find($request->id);
             $course ->title = $request->input('title') ; 
             $course ->description = $request->input('description') ;
             $course ->category_id = $request->input('category_id') ; 
