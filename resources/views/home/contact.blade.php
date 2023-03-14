@@ -1,4 +1,9 @@
-@extends('layouts.Nav')
+@if(isset($fromHome) && $fromHome === true)
+    
+@else
+  @include('layouts.Nav')
+@endif
+
 @section('title','contact')
 @section('content')
     
